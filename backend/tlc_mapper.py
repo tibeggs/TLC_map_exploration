@@ -215,10 +215,10 @@ def create_kepler_map(gdf_joined):
                                 'filled': True,
                                 'enable3d': False,
                                 'colorRange': {
-                                    'name': 'Global Warming',
+                                    'name': 'Ocean Blue',
                                     'type': 'sequential',
                                     'category': 'Uber',
-                                    'colors': ['#5A1846', '#900C3F', '#C70039', '#E3611C', '#F1920E', '#FFC300']
+                                    'colors': ['#008080', '#009999', '#00CCCC', '#00FFFF', '#FFCCCC', '#FF9999', '#FF6666', '#FF3333', '#FF0000']
                                 }
                             }
                         },
@@ -263,6 +263,6 @@ def create_kepler_map(gdf_joined):
 
 if __name__ == "__main__":
     gdf_joined = create_travel_time_map()
-    gdf_joined = gdf_joined.sample(10000)
+    # gdf_joined = gdf_joined.sample(1000)
     map_1 = create_kepler_map(gdf_joined)
     map_1.save_to_html(file_name='db_nyc_buildings_taxi_kepler_mapper_dow.html')
