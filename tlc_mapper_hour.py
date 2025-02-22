@@ -168,10 +168,10 @@ if __name__ == "__main__":
                                 'filled': True,
                                 'enable3d': False,
                                 'colorRange': {
-                                    'name': 'Ocean Blue',
+                                    'name': 'Global Warming',
                                     'type': 'sequential',
                                     'category': 'Uber',
-                                    'colors': ['#008080', '#009999', '#00CCCC', '#00FFFF', '#FFCCCC', '#FF9999', '#FF6666', '#FF3333', '#FF0000']
+                                    'colors': ['#FFC300', '#F1920E', '#E3611C', '#C70039', '#900C3F', '#5A1846']
                                 }
                             }
                         },
