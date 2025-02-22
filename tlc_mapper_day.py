@@ -50,13 +50,13 @@ def create_travel_time_map():
             SELECT 
                 cell_id,
                 boundary,
-                SUM(CASE WHEN day_of_week = 'Monday' THEN trip_count ELSE 0 END) as cnt_monday,
-                SUM(CASE WHEN day_of_week = 'Tuesday' THEN trip_count ELSE 0 END) as cnt_tuesday,
-                SUM(CASE WHEN day_of_week = 'Wednesday' THEN trip_count ELSE 0 END) as cnt_wednesday,
-                SUM(CASE WHEN day_of_week = 'Thursday' THEN trip_count ELSE 0 END) as cnt_thursday,
-                SUM(CASE WHEN day_of_week = 'Friday' THEN trip_count ELSE 0 END) as cnt_friday,
-                SUM(CASE WHEN day_of_week = 'Saturday' THEN trip_count ELSE 0 END) as cnt_saturday,
-                SUM(CASE WHEN day_of_week = 'Sunday' THEN trip_count ELSE 0 END) as cnt_sunday
+                MAX(CASE WHEN day_of_week = 'Monday' THEN trip_count ELSE 0 END) as cnt_monday,
+                MAX(CASE WHEN day_of_week = 'Tuesday' THEN trip_count ELSE 0 END) as cnt_tuesday,
+                MAX(CASE WHEN day_of_week = 'Wednesday' THEN trip_count ELSE 0 END) as cnt_wednesday,
+                MAX(CASE WHEN day_of_week = 'Thursday' THEN trip_count ELSE 0 END) as cnt_thursday,
+                MAX(CASE WHEN day_of_week = 'Friday' THEN trip_count ELSE 0 END) as cnt_friday,
+                MAX(CASE WHEN day_of_week = 'Saturday' THEN trip_count ELSE 0 END) as cnt_saturday,
+                MAX(CASE WHEN day_of_week = 'Sunday' THEN trip_count ELSE 0 END) as cnt_sunday
             FROM (
                 SELECT 
                     cell_id,
@@ -132,7 +132,7 @@ if __name__ == "__main__":
                         'id': f'buildings-layer-{day}',
                         'type': 'geojson',
                         'config': {
-                            'dataId': 'NYC Buildings with Taxi Data',
+                            'dataId': 'NYC Taxi Pickup by Day',
                             'label': f'Pickups - {day.capitalize()}',
                             'columns': {'geojson': 'geometry'},
                             'isVisible': day == 'monday',  # Only Monday visible by default
@@ -180,9 +180,8 @@ if __name__ == "__main__":
             }
         }
     }
-    
     # Create KeplerGL map
     map_1 = KeplerGl()
-    map_1.add_data(data=gdf_joined, name='NYC Buildings with Taxi Data by Day')
+    map_1.add_data(data=gdf_joined, name='NYC Taxi Pickup by Day')
     map_1.config = kepler_config
     map_1.save_to_html(file_name='tlc_kgl_daily.html')
